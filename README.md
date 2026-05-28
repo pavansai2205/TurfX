@@ -114,19 +114,3 @@ To explore all user role perspectives instantly without registering, log in with
 | **System Admin** | `admin@example.com` | `password123` | Override bookings, toggle accounts roles, monitor platform metrics. |
 
 ---
-
-## 🚀 Easy Cloud Hosting Guides
-
-### Frontend (Vercel)
-1. Select the `frontend` folder as the root directory of your project.
-2. Build Settings:
-   - **Build Command**: `npm run build`
-   - **Output Directory**: `dist`
-3. Environment variables: Set `VITE_API_URL` to your hosted backend URL (e.g., `https://api-turfx.onrender.com/api`).
-
-### Backend (Render / Railway)
-1. Provision a web service selecting the `backend` folder as the root.
-2. Build Settings:
-   - **Build Command**: `npx prisma generate`
-   - **Start Command**: `node server.js`
-3. Set your environment variables (`DATABASE_URL`, `JWT_SECRET`, `PORT`, `RAZORPAY_KEY_ID`, `RAZORPAY_KEY_SECRET`, `CLOUDINARY_*`) in your hosting console.
