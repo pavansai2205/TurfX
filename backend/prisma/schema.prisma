@@ -1,0 +1,140 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum Role {
+  USER
+  TURF_OWNER
+  ADMIN
+}
+
+enum BookingStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+  COMPLETED
+}
+
+enum PaymentStatus {
+  PENDING
+  PAID
+  FAILED
+}
+
+model User {
+  id           String    @id @default(uuid())
+  name         String
+  email        String    @unique
+  password     String
+  phone        String
+  role         Role      @default(USER)
+  profileImage String?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  
+  // Relations
+  turfs        Turf[]    @relation("OwnerTurfs")
+  bookings     Booking[] @relation("UserBookings")
+  reviews      Review[]  @relation("UserReviews")
+
+  @@index([email])
+}
+
+model Turf {
+  id           String    @id @default(uuid())
+  name         String
+  description  String
+  location     String    // E.g. "Mumbai", "Delhi"
+  address      String
+  pricePerHour Float
+  images       String[]  // Array of image URLs
+  amenities    String[]  // E.g. ["Floodlights", "Changing Rooms", "Water"]
+  rating       Float     @default(0.0)
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  
+  // Relations
+  ownerId      String
+  owner        User      @relation("OwnerTurfs", fields: [ownerId], references: [id], onDelete: Cascade)
+  slots        Slot[]    @relation("TurfSlots")
+  bookings     Booking[] @relation("TurfBookings")
+  reviews      Review[]  @relation("TurfReviews")
+
+  @@index([location])
+  @@index([ownerId])
+}
+
+model Slot {
+  id        String    @id @default(uuid())
+  startTime String    // E.g. "06:00"
+  endTime   String    // E.g. "07:00"
+  
+  // Relations
+  turfId    String
+  turf      Turf      @relation("TurfSlots", fields: [turfId], references: [id], onDelete: Cascade)
+  bookings  Booking[] @relation("SlotBookings")
+
+  @@unique([turfId, startTime, endTime]) // Avoid duplicate slots at the same time for the same turf
+  @@index([turfId])
+}
+
+model Booking {
+  id            String        @id @default(uuid())
+  bookingDate   DateTime      // Date of booking (without time component)
+  totalPrice    Float
+  bookingStatus BookingStatus @default(PENDING)
+  paymentStatus PaymentStatus @default(PENDING)
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  // Relations
+  userId        String
+  user          User          @relation("UserBookings", fields: [userId], references: [id], onDelete: Cascade)
+  turfId        String
+  turf          Turf          @relation("TurfBookings", fields: [turfId], references: [id], onDelete: Cascade)
+  slotId        String
+  slot          Slot          @relation("SlotBookings", fields: [slotId], references: [id], onDelete: Cascade)
+  payments      Payment[]     @relation("BookingPayments")
+
+  @@index([userId])
+  @@index([turfId])
+  @@index([slotId])
+  @@index([bookingDate])
+}
+
+model Payment {
+  id                 String        @id @default(uuid())
+  razorpayOrderId    String?       @unique // Optional if simulated
+  razorpayPaymentId  String?       @unique // Optional if simulated
+  amount             Float
+  paymentStatus      PaymentStatus @default(PENDING)
+  createdAt          DateTime      @default(now())
+  updatedAt          DateTime      @updatedAt
+
+  // Relations
+  bookingId          String
+  booking            Booking       @relation("BookingPayments", fields: [bookingId], references: [id], onDelete: Cascade)
+
+  @@index([bookingId])
+}
+
+model Review {
+  id        String   @id @default(uuid())
+  rating    Int      // 1 to 5 stars
+  comment   String
+  createdAt DateTime @default(now())
+
+  // Relations
+  userId    String
+  user      User     @relation("UserReviews", fields: [userId], references: [id], onDelete: Cascade)
+  turfId    String
+  turf      Turf     @relation("TurfReviews", fields: [turfId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([turfId])
+}
