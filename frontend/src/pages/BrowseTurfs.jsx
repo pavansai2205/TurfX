@@ -1,27 +1,32 @@
-import React, { useState, useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom';
-import SearchBar from '../components/SearchBar';
-import FilterSidebar from '../components/FilterSidebar';
-import TurfCard from '../components/TurfCard';
-import { CardSkeleton } from '../components/LoadingSpinner';
-import { turfAPI } from '../services/api';
-import { SlidersHorizontal } from 'lucide-react';
+import React, { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
+import SearchBar from "../components/SearchBar";
+import FilterSidebar from "../components/FilterSidebar";
+import TurfCard from "../components/TurfCard";
+import { CardSkeleton } from "../components/LoadingSpinner";
+import { turfAPI } from "../services/api";
+import { SlidersHorizontal } from "lucide-react";
 
 const BrowseTurfs = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  
+
   // API State
   const [turfs, setTurfs] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [pagination, setPagination] = useState({ page: 1, totalPages: 1, total: 0 });
+  const [loadError, setLoadError] = useState("");
+  const [pagination, setPagination] = useState({
+    page: 1,
+    totalPages: 1,
+    total: 0,
+  });
 
   // Filter State
   const [filters, setFilters] = useState({
-    search: searchParams.get('search') || '',
-    location: searchParams.get('location') || '',
-    maxPrice: parseInt(searchParams.get('maxPrice')) || 2000,
-    minRating: parseFloat(searchParams.get('minRating')) || 0,
-    page: parseInt(searchParams.get('page')) || 1
+    search: searchParams.get("search") || "",
+    location: searchParams.get("location") || "",
+    maxPrice: parseInt(searchParams.get("maxPrice")) || 2000,
+    minRating: parseFloat(searchParams.get("minRating")) || 0,
+    page: parseInt(searchParams.get("page")) || 1,
   });
 
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
@@ -29,6 +34,7 @@ const BrowseTurfs = () => {
   useEffect(() => {
     const fetchTurfs = async () => {
       setLoading(true);
+      setLoadError("");
       try {
         const queryParams = {
           search: filters.search || undefined,
@@ -36,14 +42,18 @@ const BrowseTurfs = () => {
           maxPrice: filters.maxPrice,
           minRating: filters.minRating || undefined,
           page: filters.page,
-          limit: 6 // 6 items per page for perfect grid pacing
+          limit: 6, // 6 items per page for perfect grid pacing
         };
 
         const res = await turfAPI.getAll(queryParams);
         setTurfs(res.data.turfs);
         setPagination(res.data.pagination);
       } catch (error) {
-        console.error('Failed to load turfs list:', error.message);
+        console.error("Failed to load turfs list:", error.message);
+        setLoadError(
+          "We could not load turfs right now. Check your connection and try again.",
+        );
+        setTurfs([]);
       } finally {
         setLoading(false);
       }
@@ -57,7 +67,7 @@ const BrowseTurfs = () => {
       ...prev,
       search,
       location,
-      page: 1 // Reset pagination page on new search
+      page: 1, // Reset pagination page on new search
     }));
 
     // Update query parameters
@@ -70,39 +80,41 @@ const BrowseTurfs = () => {
       ...prev,
       maxPrice,
       minRating,
-      page: 1
+      page: 1,
     }));
   };
 
   const handlePageChange = (newPage) => {
     setFilters((prev) => ({ ...prev, page: newPage }));
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
       {/* Page Header */}
       <div className="space-y-2">
-        <h1 className="text-3xl font-black text-slate-100 tracking-tight">Find a Turf</h1>
+        <h1 className="text-3xl font-black text-slate-100 tracking-tight">
+          Find a Turf
+        </h1>
         <p className="text-xs sm:text-sm text-slate-400">
           Search by city, price, and rating to book a slot that fits your group.
         </p>
       </div>
 
       {/* Floating Search Controls */}
-      <SearchBar 
-        onSearch={handleSearch} 
-        initialSearch={filters.search} 
-        initialLocation={filters.location} 
+      <SearchBar
+        onSearch={handleSearch}
+        initialSearch={filters.search}
+        initialLocation={filters.location}
       />
 
       {/* Main Filters + Grid Layout */}
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 pt-4">
         {/* Left Side Filters Sidebar (Desktop only) */}
         <div className="hidden lg:block lg:col-span-1">
-          <FilterSidebar 
-            onFilterChange={handleFilterChange} 
-            initialFilters={filters} 
+          <FilterSidebar
+            onFilterChange={handleFilterChange}
+            initialFilters={filters}
           />
         </div>
 
@@ -122,12 +134,12 @@ const BrowseTurfs = () => {
         {/* Mobile slide-down filter card */}
         {mobileFiltersOpen && (
           <div className="lg:hidden animate-fadeIn">
-            <FilterSidebar 
+            <FilterSidebar
               onFilterChange={(f) => {
                 handleFilterChange(f);
                 setMobileFiltersOpen(false);
-              }} 
-              initialFilters={filters} 
+              }}
+              initialFilters={filters}
             />
           </div>
         )}
@@ -136,7 +148,25 @@ const BrowseTurfs = () => {
         <div className="lg:col-span-3 space-y-10">
           {loading ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              {Array(4).fill(null).map((_, idx) => <CardSkeleton key={idx} />)}
+              {Array(4)
+                .fill(null)
+                .map((_, idx) => (
+                  <CardSkeleton key={idx} />
+                ))}
+            </div>
+          ) : loadError ? (
+            <div className="glass-card p-10 text-center rounded-2xl border border-red-200 flex flex-col items-center justify-center gap-4">
+              <h3 className="text-lg font-bold text-slate-800">
+                Turf search is unavailable
+              </h3>
+              <p className="text-sm text-slate-500 max-w-sm">{loadError}</p>
+              <button
+                type="button"
+                onClick={() => setFilters((prev) => ({ ...prev }))}
+                className="btn-neon-green py-2.5 px-5 text-sm"
+              >
+                Try Again
+              </button>
             </div>
           ) : turfs.length > 0 ? (
             <>
@@ -157,7 +187,9 @@ const BrowseTurfs = () => {
                     Previous
                   </button>
                   <span className="text-xs text-slate-400 font-bold">
-                    Page <span className="text-sportsGreen">{filters.page}</span> of {pagination.totalPages}
+                    Page{" "}
+                    <span className="text-sportsGreen">{filters.page}</span> of{" "}
+                    {pagination.totalPages}
                   </span>
                   <button
                     disabled={filters.page === pagination.totalPages}
@@ -172,9 +204,12 @@ const BrowseTurfs = () => {
           ) : (
             <div className="glass-card p-16 text-center rounded-3xl border border-slate-800 flex flex-col items-center justify-center gap-4">
               <div className="text-slate-655 text-6xl">🏏</div>
-              <h3 className="text-lg font-bold text-slate-300">No turfs found</h3>
+              <h3 className="text-lg font-bold text-slate-300">
+                No turfs found
+              </h3>
               <p className="text-xs text-slate-500 max-w-sm">
-                Try another city, lower the rating filter, or increase your max budget.
+                Try another city, lower the rating filter, or increase your max
+                budget.
               </p>
             </div>
           )}

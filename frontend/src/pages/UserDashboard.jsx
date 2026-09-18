@@ -17,10 +17,10 @@ import { bookingAPI, getErrorMessage } from '../services/api';
 import LoadingSpinner from '../components/LoadingSpinner';
 
 const statusStyles = {
-  CONFIRMED: 'bg-emerald-500/10 text-emerald-300 border-emerald-500/30',
-  PENDING: 'bg-amber-500/10 text-amber-300 border-amber-500/30',
-  CANCELLED: 'bg-red-500/10 text-red-300 border-red-500/30',
-  COMPLETED: 'bg-sky-500/10 text-sky-300 border-sky-500/30',
+  CONFIRMED: 'bg-emerald-50 text-emerald-700 border-emerald-200 font-bold',
+  PENDING: 'bg-amber-50 text-amber-700 border-amber-200 font-bold',
+  CANCELLED: 'bg-red-50 text-red-700 border-red-200 font-bold',
+  COMPLETED: 'bg-sky-50 text-sky-700 border-sky-200 font-bold',
 };
 
 const filters = ['ALL', 'UPCOMING', 'PENDING', 'CONFIRMED', 'COMPLETED', 'CANCELLED'];
@@ -112,7 +112,7 @@ const UserDashboard = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-darkBg-deep flex items-center justify-center">
+      <div className="min-h-screen bg-[#F4F6F4] flex items-center justify-center">
         <LoadingSpinner size="lg" />
       </div>
     );
@@ -127,10 +127,10 @@ const UserDashboard = () => {
             Player Dashboard
           </div>
           <div>
-            <h1 className="text-3xl sm:text-4xl font-black text-slate-100 tracking-tight">
+            <h1 className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">
               Your turf bookings
             </h1>
-            <p className="mt-2 max-w-2xl text-sm text-slate-400">
+            <p className="mt-2 max-w-2xl text-sm text-slate-600">
               Track upcoming games, complete pending payments, download receipts, and cancel open reservations.
             </p>
           </div>
@@ -160,10 +160,10 @@ const UserDashboard = () => {
         <StatCard icon={Wallet} label="Total spent" value={currency.format(stats.paid)} />
       </section>
 
-      <section className="glass-card rounded-2xl border border-slate-800 overflow-hidden shadow-xl">
-        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 border-b border-slate-800 bg-darkBg-accent/60 px-4 sm:px-6 py-5">
+      <section className="glass-card rounded-2xl border border-slate-200 bg-white overflow-hidden shadow-sm">
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 border-b border-slate-200 bg-slate-50/80 px-4 sm:px-6 py-5">
           <div>
-            <h2 className="text-lg font-black text-slate-100">Booking history</h2>
+            <h2 className="text-lg font-black text-slate-900">Booking history</h2>
             <p className="mt-1 text-xs text-slate-500">Status, slot time, payment, and quick actions in one place.</p>
           </div>
 
@@ -173,10 +173,10 @@ const UserDashboard = () => {
                 key={filter}
                 type="button"
                 onClick={() => setActiveFilter(filter)}
-                className={`shrink-0 rounded-xl border px-3 py-2 text-[10px] font-black uppercase tracking-wider transition-colors ${
+                className={`shrink-0 rounded-xl border px-3 py-2 text-[10px] font-bold uppercase tracking-wider transition-all ${
                   activeFilter === filter
-                    ? 'border-sportsGreen bg-sportsGreen text-slate-950'
-                    : 'border-slate-700 bg-slate-900/50 text-slate-400 hover:text-slate-100'
+                    ? 'border-sportsGreen bg-sportsGreen text-white font-black shadow-sm'
+                    : 'border-slate-200 bg-white text-slate-600 hover:border-sportsGreen hover:text-sportsGreen'
                 }`}
               >
                 {filter.toLowerCase()}
@@ -188,8 +188,8 @@ const UserDashboard = () => {
         {filteredBookings.length > 0 ? (
           <>
             <div className="hidden lg:block overflow-x-auto">
-              <table className="w-full border-collapse text-left text-sm text-slate-300">
-                <thead className="bg-slate-950/40 text-[10px] uppercase tracking-widest text-slate-500">
+              <table className="w-full border-collapse text-left text-sm text-slate-700">
+                <thead className="bg-slate-50 text-[10px] uppercase tracking-widest text-slate-500 border-b border-slate-200">
                   <tr>
                     <th className="px-6 py-4">Turf</th>
                     <th className="px-6 py-4">Date</th>
@@ -199,7 +199,7 @@ const UserDashboard = () => {
                     <th className="px-6 py-4 text-right">Actions</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-800/80">
+                <tbody className="divide-y divide-slate-100">
                   {filteredBookings.map((booking) => (
                     <BookingRow
                       key={booking.id}
@@ -231,14 +231,14 @@ const UserDashboard = () => {
   );
 };
 
-const StatCard = ({ icon: Icon, label, value, accent = 'text-slate-100' }) => (
-  <div className="glass-card rounded-2xl border border-slate-800 p-5">
+const StatCard = ({ icon: Icon, label, value, accent = 'text-slate-900' }) => (
+  <div className="glass-card rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
     <div className="flex items-start justify-between gap-4">
       <div>
         <p className="text-[10px] font-black uppercase tracking-widest text-slate-500">{label}</p>
         <p className={`mt-2 text-2xl font-black ${accent}`}>{value}</p>
       </div>
-      <div className="rounded-xl border border-slate-800 bg-slate-950/40 p-2.5 text-sportsGreen">
+      <div className="rounded-xl border border-sportsGreen/20 bg-sportsGreen/10 p-2.5 text-sportsGreen">
         <Icon size={20} />
       </div>
     </div>
@@ -257,12 +257,12 @@ const StatusBadge = ({ status }) => (
 
 const PaymentBadge = ({ status }) => (
   <span
-    className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[10px] font-black uppercase tracking-wider ${
+    className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider ${
       status === 'PAID'
-        ? 'border-emerald-500/30 bg-emerald-500/10 text-emerald-300'
+        ? 'border-emerald-200 bg-emerald-50 text-emerald-700'
         : status === 'FAILED'
-        ? 'border-red-500/30 bg-red-500/10 text-red-300'
-        : 'border-amber-500/30 bg-amber-500/10 text-amber-300'
+        ? 'border-red-200 bg-red-50 text-red-600'
+        : 'border-amber-200 bg-amber-50 text-amber-700'
     }`}
   >
     <CreditCard size={11} />
@@ -280,7 +280,7 @@ const BookingActions = ({ booking, submitting, onCancel }) => (
     )}
 
     {booking.paymentStatus === 'PAID' && (
-      <Link to={`/bookings/payment/${booking.id}`} className="btn-glass py-2 px-3 text-[10px] font-bold">
+      <Link to={`/bookings/payment/${booking.id}`} className="btn-glass py-2 px-3 text-[10px] font-bold text-slate-700 bg-white hover:bg-slate-50">
         <Receipt size={12} />
         Receipt
       </Link>
@@ -291,7 +291,7 @@ const BookingActions = ({ booking, submitting, onCancel }) => (
         type="button"
         disabled={submitting}
         onClick={() => onCancel(booking)}
-        className="inline-flex items-center justify-center rounded-xl border border-red-500/20 bg-red-950/30 p-2 text-red-300 transition hover:bg-red-900/60 disabled:cursor-not-allowed disabled:opacity-50"
+        className="inline-flex items-center justify-center rounded-xl border border-red-200 bg-red-50 p-2 text-red-600 transition hover:bg-red-100 disabled:cursor-not-allowed disabled:opacity-50"
         title="Cancel booking"
       >
         <XCircle size={15} />
@@ -301,23 +301,23 @@ const BookingActions = ({ booking, submitting, onCancel }) => (
 );
 
 const BookingRow = ({ booking, submitting, onCancel }) => (
-  <tr className="hover:bg-slate-900/30 transition-colors">
+  <tr className="hover:bg-slate-50 transition-colors">
     <td className="px-6 py-4">
-      <p className="font-black text-slate-100">{booking.turf?.name || 'Deleted turf'}</p>
-      <p className="mt-1 flex items-center gap-1.5 text-xs text-slate-500">
+      <p className="font-black text-slate-900">{booking.turf?.name || 'Deleted turf'}</p>
+      <p className="mt-1 flex items-center gap-1.5 text-xs font-bold text-slate-500">
         <MapPin size={12} />
         {booking.turf?.location || 'Location unavailable'}
       </p>
     </td>
-    <td className="px-6 py-4 font-bold text-slate-300">{formatDate(booking.bookingDate)}</td>
+    <td className="px-6 py-4 font-bold text-slate-700">{formatDate(booking.bookingDate)}</td>
     <td className="px-6 py-4">
-      <span className="inline-flex items-center gap-2 font-black text-slate-200">
+      <span className="inline-flex items-center gap-2 font-bold text-slate-800">
         <Clock size={14} className="text-sportsGreen" />
         {getSlotLabel(booking)}
       </span>
     </td>
     <td className="px-6 py-4 space-y-2">
-      <p className="font-black text-slate-100">{currency.format(Number(booking.totalPrice || 0))}</p>
+      <p className="font-black text-slate-900">{currency.format(Number(booking.totalPrice || 0))}</p>
       <PaymentBadge status={booking.paymentStatus} />
     </td>
     <td className="px-6 py-4 text-center">
@@ -330,11 +330,11 @@ const BookingRow = ({ booking, submitting, onCancel }) => (
 );
 
 const BookingCard = ({ booking, submitting, onCancel }) => (
-  <article className="rounded-2xl border border-slate-800 bg-slate-950/30 p-4 space-y-4">
+  <article className="rounded-2xl border border-slate-200 bg-slate-50/70 p-4 space-y-4">
     <div className="flex items-start justify-between gap-3">
       <div>
-        <h3 className="font-black text-slate-100">{booking.turf?.name || 'Deleted turf'}</h3>
-        <p className="mt-1 flex items-center gap-1.5 text-xs text-slate-500">
+        <h3 className="font-black text-slate-900">{booking.turf?.name || 'Deleted turf'}</h3>
+        <p className="mt-1 flex items-center gap-1.5 text-xs font-bold text-slate-500">
           <MapPin size={12} />
           {booking.turf?.location || 'Location unavailable'}
         </p>
@@ -343,19 +343,19 @@ const BookingCard = ({ booking, submitting, onCancel }) => (
     </div>
 
     <div className="grid grid-cols-2 gap-3 text-xs">
-      <div className="rounded-xl bg-slate-900/70 p-3">
+      <div className="rounded-xl bg-white border border-slate-200 p-3">
         <p className="text-slate-500 font-bold">Date</p>
-        <p className="mt-1 font-black text-slate-200">{formatDate(booking.bookingDate)}</p>
+        <p className="mt-1 font-black text-slate-900">{formatDate(booking.bookingDate)}</p>
       </div>
-      <div className="rounded-xl bg-slate-900/70 p-3">
+      <div className="rounded-xl bg-white border border-slate-200 p-3">
         <p className="text-slate-500 font-bold">Slot</p>
-        <p className="mt-1 font-black text-slate-200">{getSlotLabel(booking)}</p>
+        <p className="mt-1 font-black text-slate-900">{getSlotLabel(booking)}</p>
       </div>
-      <div className="rounded-xl bg-slate-900/70 p-3">
+      <div className="rounded-xl bg-white border border-slate-200 p-3">
         <p className="text-slate-500 font-bold">Amount</p>
-        <p className="mt-1 font-black text-slate-200">{currency.format(Number(booking.totalPrice || 0))}</p>
+        <p className="mt-1 font-black text-slate-900">{currency.format(Number(booking.totalPrice || 0))}</p>
       </div>
-      <div className="rounded-xl bg-slate-900/70 p-3">
+      <div className="rounded-xl bg-white border border-slate-200 p-3">
         <p className="text-slate-500 font-bold">Payment</p>
         <div className="mt-1">
           <PaymentBadge status={booking.paymentStatus} />
@@ -369,10 +369,10 @@ const BookingCard = ({ booking, submitting, onCancel }) => (
 
 const EmptyState = ({ activeFilter }) => (
   <div className="px-6 py-16 text-center">
-    <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl border border-slate-800 bg-slate-950/50 text-sportsGreen">
+    <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl border border-sportsGreen/20 bg-sportsGreen/10 text-sportsGreen">
       <Calendar size={26} />
     </div>
-    <h3 className="text-lg font-black text-slate-100">No bookings found</h3>
+    <h3 className="text-lg font-black text-slate-900">No bookings found</h3>
     <p className="mx-auto mt-2 max-w-md text-sm text-slate-500">
       {activeFilter === 'ALL'
         ? 'Book a turf slot and it will appear here with payment and status details.'

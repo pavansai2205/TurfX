@@ -178,14 +178,14 @@ const BookingPage = () => {
           <div className="space-y-3.5 pt-2 text-xs">
             <div className="flex justify-between items-center text-slate-400 font-medium">
               <span>One Hour Slot Fee</span>
-              <span>₹{pricePerHour.toFixed(2)}</span>
+              <span>₹{Number(pricePerHour || 0).toFixed(2)}</span>
             </div>
 
             <div className="h-px bg-slate-850 my-4"></div>
 
             <div className="flex justify-between items-center text-slate-100 font-bold text-sm">
               <span>Total Payable</span>
-              <span className="text-sportsGreen text-base font-black">₹{pricePerHour.toFixed(2)}</span>
+              <span className="text-sportsGreen text-base font-black">₹{Number(pricePerHour || 0).toFixed(2)}</span>
             </div>
           </div>
 

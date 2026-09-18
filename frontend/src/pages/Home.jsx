@@ -67,20 +67,20 @@ const Home = () => {
     <div className="space-y-16 pb-20 relative">
       
       {/* 1. HERO SECTION */}
-      <section className="relative overflow-hidden min-h-[76vh] flex flex-col items-center justify-center pt-20 pb-12 px-4 sm:px-6 lg:px-8 text-center bg-gradient-to-b from-green-50 via-white to-slate-50">
+      <section className="field-grid relative min-h-[64vh] flex flex-col items-center justify-center pt-16 pb-14 px-4 sm:px-6 lg:px-8 text-center border-b border-[#deded5]">
         <div className="max-w-4xl mx-auto space-y-6 sm:space-y-8 relative">
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 bg-white border border-green-100 text-sportsGreen px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-wider shadow-sm">
-            <Sparkles size={12} /> Easy cricket turf booking
+          <div className="inline-flex items-center gap-2 bg-white border border-[#d8d9d1] text-sportsGreen px-4 py-2 rounded-full text-[10px] font-bold uppercase tracking-wider">
+            <Sparkles size={12} /> Find a ground. Play today.
           </div>
 
-          <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight leading-none text-slate-100">
-            Book a cricket turf <br />
-            <span className="text-sportsGreen font-black">without the hassle</span>
+          <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight leading-[.95] text-slate-100" style={{ fontFamily: 'Newsreader, serif' }}>
+            Your next game starts<br />
+            <span className="text-sportsGreen">with the right turf.</span>
           </h1>
 
-          <p className="text-slate-400 text-sm sm:text-lg max-w-2xl mx-auto leading-relaxed">
-            Find nearby grounds, check available slots, pay securely, and keep all your bookings in one simple dashboard.
+          <p className="text-slate-500 text-sm sm:text-lg max-w-2xl mx-auto leading-relaxed">
+            Browse local cricket grounds, see open slots, and reserve a time that works for your team.
           </p>
 
           {/* Search bar inside container */}
@@ -106,8 +106,8 @@ const Home = () => {
       {/* 2. STATS & FEATURES */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div className="glass-card p-8 rounded-3xl border border-slate-800 flex items-start gap-4">
-            <div className="w-12 h-12 bg-sportsGreen/10 rounded-2xl flex items-center justify-center text-sportsGreen shrink-0">
+          <div className="glass-card p-8 rounded-3xl flex items-start gap-4">
+            <div className="w-12 h-12 bg-[#c8ff3d]/10 rounded-2xl flex items-center justify-center text-[#c8ff3d] shrink-0">
               <Zap size={24} />
             </div>
             <div>
@@ -118,8 +118,8 @@ const Home = () => {
             </div>
           </div>
 
-          <div className="glass-card p-8 rounded-3xl border border-slate-800 flex items-start gap-4">
-            <div className="w-12 h-12 bg-sportsGreen/10 rounded-2xl flex items-center justify-center text-sportsGreen shrink-0">
+          <div className="glass-card p-8 rounded-3xl flex items-start gap-4">
+            <div className="w-12 h-12 bg-[#c8ff3d]/10 rounded-2xl flex items-center justify-center text-[#c8ff3d] shrink-0">
               <Award size={24} />
             </div>
             <div>
@@ -130,8 +130,8 @@ const Home = () => {
             </div>
           </div>
 
-          <div className="glass-card p-8 rounded-3xl border border-slate-800 flex items-start gap-4">
-            <div className="w-12 h-12 bg-sportsGreen/10 rounded-2xl flex items-center justify-center text-sportsGreen shrink-0">
+          <div className="glass-card p-8 rounded-3xl flex items-start gap-4">
+            <div className="w-12 h-12 bg-[#c8ff3d]/10 rounded-2xl flex items-center justify-center text-[#c8ff3d] shrink-0">
               <Smile size={24} />
             </div>
             <div>

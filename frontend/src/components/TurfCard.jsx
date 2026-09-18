@@ -10,7 +10,7 @@ const TurfCard = ({ turf }) => {
     : 'https://images.unsplash.com/photo-1540747737956-37872ce3f862?w=800&auto=format&fit=crop&q=80';
 
   return (
-    <div className="glass-card rounded-2xl overflow-hidden glass-card-hover border border-slate-800 flex flex-col h-full shadow-sm group">
+    <div className="glass-card rounded-2xl overflow-hidden glass-card-hover flex flex-col h-full group">
       {/* Visual Header */}
       <div className="relative h-44 sm:h-48 w-full overflow-hidden bg-slate-100 shrink-0">
         <img 
@@ -19,9 +19,9 @@ const TurfCard = ({ turf }) => {
           loading="lazy"
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
         />
-        <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-md px-3 py-1.5 rounded-xl border border-slate-200 flex items-center gap-1 shadow-sm">
-          <Star size={12} className="text-sportsGreen fill-sportsGreen" />
-          <span className="text-[10px] font-extrabold text-slate-100">{rating > 0 ? rating.toFixed(1) : 'New'}</span>
+        <div className="absolute top-4 left-4 bg-white/95 backdrop-blur-md px-3 py-1.5 rounded-lg border border-[#deded5] flex items-center gap-1 shadow-sm">
+          <Star size={12} className="text-sportsOrange fill-sportsOrange" />
+          <span className="text-[10px] font-extrabold text-slate-100">{Number(rating) > 0 ? Number(rating).toFixed(1) : 'New'}</span>
         </div>
       </div>
 
@@ -29,7 +29,7 @@ const TurfCard = ({ turf }) => {
       <div className="p-5 flex-1 flex flex-col justify-between">
         <div>
           {/* Location tag */}
-          <div className="flex items-center gap-1 text-[10px] font-extrabold text-sportsGreen uppercase tracking-widest mb-1.5">
+          <div className="flex items-center gap-1 text-[10px] font-extrabold text-sportsGreen uppercase tracking-wider mb-1.5">
             <MapPin size={10} /> {location}
           </div>
 
@@ -42,13 +42,13 @@ const TurfCard = ({ turf }) => {
             {amenities && amenities.slice(0, 3).map((item, idx) => (
               <span 
                 key={idx} 
-                className="bg-slate-50 text-slate-500 border border-slate-200 px-2 py-0.5 rounded-lg text-[9px] font-bold"
+                className="bg-[#f3f4ee] text-slate-500 border border-[#e2e3dc] px-2 py-0.5 rounded-md text-[9px] font-bold"
               >
                 {item}
               </span>
             ))}
             {amenities && amenities.length > 3 && (
-              <span className="bg-slate-50 text-slate-500 border border-slate-200 px-2 py-0.5 rounded-lg text-[9px] font-black">
+              <span className="bg-[#f3f4ee] text-slate-500 border border-[#e2e3dc] px-2 py-0.5 rounded-md text-[9px] font-black">
                 +{amenities.length - 3} More
               </span>
             )}
@@ -56,7 +56,7 @@ const TurfCard = ({ turf }) => {
         </div>
 
         {/* Action footer */}
-        <div className="border-t border-slate-900/60 pt-4 flex items-center justify-between gap-4 mt-auto">
+        <div className="border-t border-[#e2e3dc] pt-4 flex items-center justify-between gap-4 mt-auto">
           <div>
             <p className="text-[9px] text-slate-500 font-bold uppercase tracking-wider">Price per hour</p>
             <p className="text-base font-black text-slate-100">

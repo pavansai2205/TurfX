@@ -32,10 +32,10 @@ const emptyForm = {
 };
 
 const statusStyles = {
-  CONFIRMED: 'bg-emerald-500/10 text-emerald-300 border-emerald-500/30',
-  PENDING: 'bg-amber-500/10 text-amber-300 border-amber-500/30',
-  CANCELLED: 'bg-red-500/10 text-red-300 border-red-500/30',
-  COMPLETED: 'bg-sky-500/10 text-sky-300 border-sky-500/30',
+  CONFIRMED: 'bg-emerald-50 text-emerald-700 border-emerald-200 font-bold',
+  PENDING: 'bg-amber-50 text-amber-700 border-amber-200 font-bold',
+  CANCELLED: 'bg-red-50 text-red-700 border-red-200 font-bold',
+  COMPLETED: 'bg-sky-50 text-sky-700 border-sky-200 font-bold',
 };
 
 const currency = new Intl.NumberFormat('en-IN', {
@@ -245,7 +245,7 @@ const OwnerDashboard = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-darkBg-deep flex items-center justify-center">
+      <div className="min-h-screen bg-[#F4F6F4] flex items-center justify-center">
         <LoadingSpinner size="lg" />
       </div>
     );
@@ -260,10 +260,10 @@ const OwnerDashboard = () => {
             Owner Dashboard
           </div>
           <div>
-            <h1 className="text-3xl sm:text-4xl font-black text-slate-100 tracking-tight">
+            <h1 className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">
               Manage your turf business
             </h1>
-            <p className="mt-2 max-w-2xl text-sm text-slate-400">
+            <p className="mt-2 max-w-2xl text-sm text-slate-600">
               Publish grounds, update listing details, review player bookings, and keep slot status accurate.
             </p>
           </div>
@@ -294,7 +294,6 @@ const OwnerDashboard = () => {
       </section>
 
       {showForm && (() => {
-        // Parse active amenities dynamically from the string representation
         const activeAmenities = formData.amenities 
           ? formData.amenities.split(',').map(item => item.trim()).filter(Boolean) 
           : [];
@@ -315,21 +314,21 @@ const OwnerDashboard = () => {
         };
 
         return (
-          <section className="glass-card rounded-3xl border border-sportsGreen/30 p-6 sm:p-8 shadow-2xl space-y-8 animate-slideDown">
+          <section className="glass-card rounded-3xl border border-sportsGreen/30 p-6 sm:p-8 shadow-xl space-y-8 bg-white animate-slideDown">
             {/* Header section */}
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-905 pb-5">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 pb-5">
               <div>
-                <h2 className="text-xl font-black text-slate-100 uppercase tracking-wide">
+                <h2 className="text-xl font-black text-slate-900 uppercase tracking-wide">
                   🏟️ {editingTurfId ? 'Update Pitch Parameters' : 'Publish New Cricket Turf'}
                 </h2>
-                <p className="mt-1 text-xs text-slate-400">
+                <p className="mt-1 text-xs text-slate-500">
                   Fill in parameters to instantly publish the arena and auto-generate hourly timing sheets.
                 </p>
               </div>
               <button 
                 type="button" 
                 onClick={resetForm} 
-                className="btn-glass self-start py-2 px-4 text-xs font-bold hover:border-slate-700"
+                className="btn-glass self-start py-2 px-4 text-xs font-bold hover:border-slate-400"
               >
                 <X size={14} /> Close Editor
               </button>
@@ -339,31 +338,31 @@ const OwnerDashboard = () => {
               
               {/* SECTION 1: BASIC DEMOGRAPHICS */}
               <div className="space-y-4">
-                <h3 className="text-xs uppercase tracking-wider text-sportsGreen font-black border-b border-slate-900 pb-2">
+                <h3 className="text-xs uppercase tracking-wider text-sportsGreen font-black border-b border-slate-200 pb-2">
                   1. Basic Turf Parameters
                 </h3>
                 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   {/* Name */}
                   <div className="space-y-1.5">
-                    <label className="text-slate-450 uppercase tracking-wider block">Turf Ground Name *</label>
+                    <label className="text-slate-600 uppercase tracking-wider block">Turf Ground Name *</label>
                     <input
                       type="text"
                       required
                       value={formData.name}
                       onChange={(event) => setFormData((prev) => ({ ...prev, name: event.target.value }))}
-                      className="w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-3 text-xs text-slate-100 placeholder:text-slate-500 focus:outline-none focus:border-sportsGreen focus:ring-0 transition-colors"
+                      className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-xs text-slate-900 placeholder:text-slate-400 focus:bg-white focus:outline-none focus:border-sportsGreen focus:ring-2 focus:ring-sportsGreen/20 transition-all"
                       placeholder="E.g. Wankhede Nets Arena"
                     />
                   </div>
 
                   {/* Location City */}
                   <div className="space-y-1.5">
-                    <label className="text-slate-450 uppercase tracking-wider block">City Location *</label>
+                    <label className="text-slate-600 uppercase tracking-wider block">City Location *</label>
                     <select
                       value={formData.location}
                       onChange={(event) => setFormData((prev) => ({ ...prev, location: event.target.value }))}
-                      className="w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-3 text-xs text-slate-200 cursor-pointer focus:outline-none focus:border-sportsGreen focus:ring-0"
+                      className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-xs text-slate-900 cursor-pointer focus:bg-white focus:outline-none focus:border-sportsGreen focus:ring-2 focus:ring-sportsGreen/20"
                     >
                       <option value="Mumbai">Mumbai</option>
                       <option value="Bangalore">Bangalore</option>
@@ -375,14 +374,14 @@ const OwnerDashboard = () => {
 
                   {/* Hourly rent */}
                   <div className="space-y-1.5">
-                    <label className="text-slate-450 uppercase tracking-wider block">Price Per Hour (₹ INR) *</label>
+                    <label className="text-slate-600 uppercase tracking-wider block">Price Per Hour (₹ INR) *</label>
                     <input
                       type="number"
                       min="100"
                       required
                       value={formData.pricePerHour}
                       onChange={(event) => setFormData((prev) => ({ ...prev, pricePerHour: event.target.value }))}
-                      className="w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-3 text-xs text-slate-100 placeholder:text-slate-500 focus:outline-none focus:border-sportsGreen focus:ring-0 transition-colors"
+                      className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-xs text-slate-900 placeholder:text-slate-400 focus:bg-white focus:outline-none focus:border-sportsGreen focus:ring-2 focus:ring-sportsGreen/20 transition-all"
                       placeholder="E.g. 1200"
                     />
                   </div>
@@ -391,24 +390,24 @@ const OwnerDashboard = () => {
 
               {/* SECTION 2: PHOTOS & LOCATION ADDRESS */}
               <div className="space-y-4 pt-2">
-                <h3 className="text-xs uppercase tracking-wider text-sportsGreen font-black border-b border-slate-900 pb-2">
+                <h3 className="text-xs uppercase tracking-wider text-sportsGreen font-black border-b border-slate-200 pb-2">
                   2. Media & Physical Address
                 </h3>
                 
                 <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
-                  {/* Photo details & file selector (Left 7 cols) */}
+                  {/* Photo details & file selector */}
                   <div className="md:col-span-7 space-y-4">
                     <div className="space-y-1.5">
-                      <label className="text-slate-450 uppercase tracking-wider block">Ground Banner Photo</label>
+                      <label className="text-slate-600 uppercase tracking-wider block">Ground Banner Photo</label>
                       <div className="flex gap-2">
                         <input
                           type="url"
                           value={formData.imageUrl}
                           onChange={(event) => setFormData((prev) => ({ ...prev, imageUrl: event.target.value }))}
-                          className="flex-1 bg-slate-900 border border-slate-800 rounded-xl px-4 py-3 text-xs text-slate-100 placeholder:text-slate-500 focus:outline-none focus:border-sportsGreen"
+                          className="flex-1 bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-xs text-slate-900 placeholder:text-slate-400 focus:bg-white focus:outline-none focus:border-sportsGreen"
                           placeholder="https://images.unsplash.com/... or upload local"
                         />
-                        <label className="bg-slate-800 hover:bg-slate-700 border border-slate-700 px-4 py-3 rounded-xl cursor-pointer text-slate-200 hover:text-sportsGreen flex items-center justify-center gap-1.5 shrink-0 transition-colors">
+                        <label className="bg-slate-100 hover:bg-slate-200 border border-slate-200 px-4 py-3 rounded-xl cursor-pointer text-slate-700 hover:text-sportsGreen flex items-center justify-center gap-1.5 shrink-0 transition-colors">
                           {uploadingImage ? <RefreshCw size={14} className="animate-spin" /> : <UploadCloud size={14} />}
                           <span>Upload File</span>
                           <input 
@@ -424,22 +423,22 @@ const OwnerDashboard = () => {
 
                     {/* Physical Street address */}
                     <div className="space-y-1.5">
-                      <label className="text-slate-450 uppercase tracking-wider block">Physical Street Address *</label>
+                      <label className="text-slate-600 uppercase tracking-wider block">Physical Street Address *</label>
                       <textarea
                         required
                         rows="3"
                         value={formData.address}
                         onChange={(event) => setFormData((prev) => ({ ...prev, address: event.target.value }))}
-                        className="w-full bg-slate-900 border border-slate-800 rounded-xl p-4 text-xs text-slate-100 placeholder:text-slate-500 focus:outline-none focus:border-sportsGreen resize-none"
+                        className="w-full bg-slate-50 border border-slate-200 rounded-xl p-4 text-xs text-slate-900 placeholder:text-slate-400 focus:bg-white focus:outline-none focus:border-sportsGreen resize-none"
                         placeholder="Street details, landmarks, postcode details..."
                       />
                     </div>
                   </div>
 
-                  {/* Photo Visual Preview Frame (Right 5 cols) */}
+                  {/* Photo Visual Preview Frame */}
                   <div className="md:col-span-5 flex flex-col justify-center">
-                    <span className="text-slate-550 uppercase tracking-wider block mb-2 text-[10px]">Photo Banner Preview</span>
-                    <div className="h-44 w-full rounded-2xl overflow-hidden border border-slate-800 bg-slate-900/60 flex items-center justify-center relative group">
+                    <span className="text-slate-500 uppercase tracking-wider block mb-2 text-[10px]">Photo Banner Preview</span>
+                    <div className="h-44 w-full rounded-2xl overflow-hidden border border-slate-200 bg-slate-50 flex items-center justify-center relative group">
                       {formData.imageUrl.trim() ? (
                         <>
                           <img 
@@ -450,14 +449,14 @@ const OwnerDashboard = () => {
                           <button
                             type="button"
                             onClick={() => setFormData(prev => ({ ...prev, imageUrl: '' }))}
-                            className="absolute top-2 right-2 bg-slate-950/80 p-2 rounded-xl text-slate-400 hover:text-red-400 border border-slate-800"
+                            className="absolute top-2 right-2 bg-white/90 p-2 rounded-xl text-slate-600 hover:text-red-600 border border-slate-200 shadow-sm"
                             title="Remove Photo"
                           >
                             <X size={14} />
                           </button>
                         </>
                       ) : (
-                        <div className="text-center p-4 space-y-1.5 text-slate-500">
+                        <div className="text-center p-4 space-y-1.5 text-slate-400">
                           <p className="text-lg">🏏</p>
                           <p className="text-[10px]">Image preview will load here.</p>
                         </div>
@@ -467,15 +466,15 @@ const OwnerDashboard = () => {
                 </div>
               </div>
 
-              {/* SECTION 3: AMENITIES CLICK TILES & DESCRIPTION */}
+              {/* SECTION 3: AMENITIES & DESCRIPTION */}
               <div className="space-y-4 pt-2">
-                <h3 className="text-xs uppercase tracking-wider text-sportsGreen font-black border-b border-slate-900 pb-2">
+                <h3 className="text-xs uppercase tracking-wider text-sportsGreen font-black border-b border-slate-200 pb-2">
                   3. Pitch Specs & Click-to-Select Amenities
                 </h3>
 
                 {/* Clickable Amenities Badges Grid */}
                 <div className="space-y-2">
-                  <label className="text-slate-450 uppercase tracking-wider block">Pitch Amenities (Select All That Apply)</label>
+                  <label className="text-slate-600 uppercase tracking-wider block">Pitch Amenities (Select All That Apply)</label>
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                     {STANDARD_AMENITIES_LIST.map((item) => {
                       const isSelected = activeAmenities.includes(item);
@@ -484,10 +483,10 @@ const OwnerDashboard = () => {
                           key={item}
                           type="button"
                           onClick={() => handleAmenityBadgeToggle(item)}
-                          className={`p-3 rounded-xl border text-[10px] uppercase font-black tracking-wider transition-all flex items-center justify-center gap-1.5 ${
+                          className={`p-3 rounded-xl border text-[10px] uppercase font-bold tracking-wider transition-all flex items-center justify-center gap-1.5 ${
                             isSelected 
-                              ? 'bg-sportsGreen/10 border-sportsGreen text-sportsGreen shadow-neon-green shadow-sm'
-                              : 'bg-slate-900/40 border-slate-800 text-slate-400 hover:border-slate-700 hover:text-slate-300'
+                              ? 'bg-sportsGreen/10 border-sportsGreen text-sportsGreen shadow-sm font-black'
+                              : 'bg-slate-50 border-slate-200 text-slate-600 hover:border-slate-300 hover:text-slate-900'
                           }`}
                         >
                           <span>🏏</span>
@@ -500,20 +499,20 @@ const OwnerDashboard = () => {
 
                 {/* Detailed Pitch Description */}
                 <div className="space-y-1.5">
-                  <label className="text-slate-450 uppercase tracking-wider block">Ground / Pitch Description *</label>
+                  <label className="text-slate-600 uppercase tracking-wider block">Ground / Pitch Description *</label>
                   <textarea
                     required
                     rows="4"
                     value={formData.description}
                     onChange={(event) => setFormData((prev) => ({ ...prev, description: event.target.value }))}
-                    className="w-full bg-slate-900 border border-slate-800 rounded-xl p-4 text-xs text-slate-100 placeholder:text-slate-500 focus:outline-none focus:border-sportsGreen resize-none"
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl p-4 text-xs text-slate-900 placeholder:text-slate-400 focus:bg-white focus:outline-none focus:border-sportsGreen resize-none"
                     placeholder="Provide grass blade specifications, pitch dimensions, standard boundaries, security policies, cafe timings..."
                   />
                 </div>
               </div>
 
               {/* Action buttons */}
-              <div className="border-t border-slate-900 pt-6 flex flex-col sm:flex-row justify-end gap-3">
+              <div className="border-t border-slate-200 pt-6 flex flex-col sm:flex-row justify-end gap-3">
                 <button 
                   type="button" 
                   onClick={resetForm} 
@@ -536,7 +535,7 @@ const OwnerDashboard = () => {
       })()}
 
       <section className="grid grid-cols-1 xl:grid-cols-12 gap-6">
-        <div className="xl:col-span-5 glass-card rounded-2xl border border-slate-800 overflow-hidden shadow-xl">
+        <div className="xl:col-span-5 glass-card rounded-2xl border border-slate-200 bg-white overflow-hidden shadow-sm">
           <PanelHeader title="Your turf listings" subtitle={`${turfs.length} listing${turfs.length === 1 ? '' : 's'} live`} />
 
           {turfs.length > 0 ? (
@@ -561,10 +560,10 @@ const OwnerDashboard = () => {
           )}
         </div>
 
-        <div className="xl:col-span-7 glass-card rounded-2xl border border-slate-800 overflow-hidden shadow-xl">
-          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 border-b border-slate-800 bg-darkBg-accent/60 px-5 py-4">
+        <div className="xl:col-span-7 glass-card rounded-2xl border border-slate-200 bg-white overflow-hidden shadow-sm">
+          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 border-b border-slate-200 bg-slate-50/80 px-5 py-4">
             <div>
-              <h2 className="text-base font-black text-slate-100">Booking requests</h2>
+              <h2 className="text-base font-black text-slate-900">Booking requests</h2>
               <p className="mt-1 text-xs text-slate-500">Approve, complete, or cancel player reservations.</p>
             </div>
             <div className="flex gap-2 overflow-x-auto pb-1 lg:pb-0">
@@ -573,10 +572,10 @@ const OwnerDashboard = () => {
                   key={filter}
                   type="button"
                   onClick={() => setBookingFilter(filter)}
-                  className={`shrink-0 rounded-xl border px-3 py-2 text-[10px] font-black uppercase tracking-wider transition-colors ${
+                  className={`shrink-0 rounded-xl border px-3 py-2 text-[10px] font-bold uppercase tracking-wider transition-all ${
                     bookingFilter === filter
-                      ? 'border-sportsGreen bg-sportsGreen text-slate-950'
-                      : 'border-slate-700 bg-slate-900/50 text-slate-400 hover:text-slate-100'
+                      ? 'border-sportsGreen bg-sportsGreen text-white font-black shadow-sm'
+                      : 'border-slate-200 bg-white text-slate-600 hover:bg-slate-100 hover:text-slate-900'
                   }`}
                 >
                   {filter.toLowerCase()}
@@ -586,7 +585,7 @@ const OwnerDashboard = () => {
           </div>
 
           {filteredBookings.length > 0 ? (
-            <div className="divide-y divide-slate-800/80">
+            <div className="divide-y divide-slate-100">
               {filteredBookings.map((booking) => (
                 <BookingRequest
                   key={booking.id}
@@ -609,24 +608,14 @@ const OwnerDashboard = () => {
   );
 };
 
-const Field = ({ children, label, required = false, className = '' }) => (
-  <label className={`space-y-1.5 ${className}`}>
-    <span className="block text-[10px] font-black uppercase tracking-widest text-slate-500">
-      {label}
-      {required && <span className="text-sportsOrange"> *</span>}
-    </span>
-    {children}
-  </label>
-);
-
-const StatCard = ({ icon: Icon, label, value, accent = 'text-slate-100' }) => (
-  <div className="glass-card rounded-2xl border border-slate-800 p-5">
+const StatCard = ({ icon: Icon, label, value, accent = 'text-slate-900' }) => (
+  <div className="glass-card rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
     <div className="flex items-start justify-between gap-4">
       <div>
         <p className="text-[10px] font-black uppercase tracking-widest text-slate-500">{label}</p>
         <p className={`mt-2 text-2xl font-black ${accent}`}>{value}</p>
       </div>
-      <div className="rounded-xl border border-slate-800 bg-slate-950/40 p-2.5 text-sportsGreen">
+      <div className="rounded-xl border border-slate-200 bg-emerald-50 p-2.5 text-sportsGreen">
         <Icon size={20} />
       </div>
     </div>
@@ -634,8 +623,8 @@ const StatCard = ({ icon: Icon, label, value, accent = 'text-slate-100' }) => (
 );
 
 const PanelHeader = ({ title, subtitle }) => (
-  <div className="border-b border-slate-800 bg-darkBg-accent/60 px-5 py-4">
-    <h2 className="text-base font-black text-slate-100">{title}</h2>
+  <div className="border-b border-slate-200 bg-slate-50/80 px-5 py-4">
+    <h2 className="text-base font-black text-slate-900">{title}</h2>
     <p className="mt-1 text-xs text-slate-500">{subtitle}</p>
   </div>
 );
@@ -654,20 +643,20 @@ const TurfListing = ({ turf, disabled, onEdit, onDelete }) => {
   const image = Array.isArray(turf.images) && turf.images.length > 0 ? turf.images[0] : null;
 
   return (
-    <article className="rounded-2xl border border-slate-800 bg-slate-950/30 p-4">
+    <article className="rounded-2xl border border-slate-200 bg-slate-50/70 p-4 hover:border-slate-300 transition-all">
       <div className="flex gap-4">
-        <div className="h-20 w-24 shrink-0 overflow-hidden rounded-xl border border-slate-800 bg-slate-900">
+        <div className="h-20 w-24 shrink-0 overflow-hidden rounded-xl border border-slate-200 bg-slate-100">
           {image ? (
             <img src={image} alt={turf.name} className="h-full w-full object-cover" />
           ) : (
-            <div className="flex h-full w-full items-center justify-center text-slate-600">
+            <div className="flex h-full w-full items-center justify-center text-slate-400">
               <ImagePlus size={22} />
             </div>
           )}
         </div>
 
         <div className="min-w-0 flex-1">
-          <h3 className="truncate text-sm font-black text-slate-100">{turf.name}</h3>
+          <h3 className="truncate text-sm font-black text-slate-900">{turf.name}</h3>
           <p className="mt-1 flex items-center gap-1.5 text-xs font-bold text-slate-500">
             <MapPin size={12} />
             {turf.location}
@@ -679,7 +668,7 @@ const TurfListing = ({ turf, disabled, onEdit, onDelete }) => {
       {Array.isArray(turf.amenities) && turf.amenities.length > 0 && (
         <div className="mt-4 flex flex-wrap gap-2">
           {turf.amenities.slice(0, 4).map((amenity) => (
-            <span key={amenity} className="rounded-lg border border-slate-800 bg-slate-900/70 px-2 py-1 text-[10px] font-bold text-slate-400">
+            <span key={amenity} className="rounded-lg border border-slate-200 bg-white px-2 py-1 text-[10px] font-bold text-slate-600 shadow-2xs">
               {amenity}
             </span>
           ))}
@@ -687,10 +676,10 @@ const TurfListing = ({ turf, disabled, onEdit, onDelete }) => {
       )}
 
       <div className="mt-4 flex flex-wrap justify-end gap-2">
-        <Link to={`/turfs/${turf.id}`} className="btn-glass py-2 px-3 text-[10px] font-bold">
+        <Link to={`/turfs/${turf.id}`} className="btn-glass py-2 px-3 text-[10px] font-bold text-slate-700 bg-white hover:bg-slate-50">
           View
         </Link>
-        <button type="button" onClick={() => onEdit(turf)} className="btn-glass py-2 px-3 text-[10px] font-bold">
+        <button type="button" onClick={() => onEdit(turf)} className="btn-glass py-2 px-3 text-[10px] font-bold text-slate-700 bg-white hover:bg-slate-50">
           <Edit3 size={12} />
           Edit
         </button>
@@ -698,7 +687,7 @@ const TurfListing = ({ turf, disabled, onEdit, onDelete }) => {
           type="button"
           disabled={disabled}
           onClick={() => onDelete(turf)}
-          className="inline-flex items-center justify-center rounded-xl border border-red-500/20 bg-red-950/30 px-3 py-2 text-[10px] font-black text-red-300 transition hover:bg-red-900/60 disabled:cursor-not-allowed disabled:opacity-50"
+          className="inline-flex items-center justify-center rounded-xl border border-red-200 bg-red-50 px-3 py-2 text-[10px] font-black text-red-600 transition hover:bg-red-100 disabled:cursor-not-allowed disabled:opacity-50"
         >
           <Trash2 size={12} />
         </button>
@@ -708,15 +697,15 @@ const TurfListing = ({ turf, disabled, onEdit, onDelete }) => {
 };
 
 const BookingRequest = ({ booking, disabled, onUpdate }) => (
-  <article className="p-4 sm:p-5 hover:bg-slate-900/20 transition-colors">
+  <article className="p-4 sm:p-5 hover:bg-slate-50 transition-colors">
     <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
       <div className="min-w-0">
         <div className="flex flex-wrap items-center gap-2">
-          <h3 className="font-black text-slate-100">{booking.user?.name || 'Player'}</h3>
+          <h3 className="font-black text-slate-900">{booking.user?.name || 'Player'}</h3>
           <StatusBadge status={booking.bookingStatus} />
         </div>
         <p className="mt-1 text-xs text-slate-500">{booking.user?.email || 'No email'}{booking.user?.phone ? ` · ${booking.user.phone}` : ''}</p>
-        <p className="mt-2 text-sm font-bold text-slate-300">{booking.turf?.name || 'Deleted turf'}</p>
+        <p className="mt-2 text-sm font-bold text-slate-700">{booking.turf?.name || 'Deleted turf'}</p>
       </div>
 
       <div className="grid grid-cols-2 sm:flex sm:items-center gap-3 text-xs">
@@ -732,7 +721,7 @@ const BookingRequest = ({ booking, disabled, onUpdate }) => (
           type="button"
           disabled={disabled}
           onClick={() => onUpdate(booking, 'CONFIRMED')}
-          className="inline-flex items-center gap-2 rounded-xl border border-emerald-500/20 bg-emerald-950/30 px-3 py-2 text-[10px] font-black text-emerald-300 transition hover:bg-emerald-900/60 disabled:cursor-not-allowed disabled:opacity-50"
+          className="inline-flex items-center gap-2 rounded-xl border border-emerald-200 bg-emerald-50 px-3 py-2 text-[10px] font-black text-emerald-700 transition hover:bg-emerald-100 disabled:cursor-not-allowed disabled:opacity-50"
         >
           <Check size={12} />
           Approve
@@ -744,7 +733,7 @@ const BookingRequest = ({ booking, disabled, onUpdate }) => (
           type="button"
           disabled={disabled}
           onClick={() => onUpdate(booking, 'COMPLETED')}
-          className="inline-flex items-center gap-2 rounded-xl border border-sky-500/20 bg-sky-950/30 px-3 py-2 text-[10px] font-black text-sky-300 transition hover:bg-sky-900/60 disabled:cursor-not-allowed disabled:opacity-50"
+          className="inline-flex items-center gap-2 rounded-xl border border-sky-200 bg-sky-50 px-3 py-2 text-[10px] font-black text-sky-700 transition hover:bg-sky-100 disabled:cursor-not-allowed disabled:opacity-50"
         >
           <Check size={12} />
           Complete
@@ -756,7 +745,7 @@ const BookingRequest = ({ booking, disabled, onUpdate }) => (
           type="button"
           disabled={disabled}
           onClick={() => onUpdate(booking, 'CANCELLED')}
-          className="inline-flex items-center gap-2 rounded-xl border border-red-500/20 bg-red-950/30 px-3 py-2 text-[10px] font-black text-red-300 transition hover:bg-red-900/60 disabled:cursor-not-allowed disabled:opacity-50"
+          className="inline-flex items-center gap-2 rounded-xl border border-red-200 bg-red-50 px-3 py-2 text-[10px] font-black text-red-600 transition hover:bg-red-100 disabled:cursor-not-allowed disabled:opacity-50"
         >
           <X size={12} />
           Cancel
@@ -767,7 +756,7 @@ const BookingRequest = ({ booking, disabled, onUpdate }) => (
 );
 
 const InfoPill = ({ icon: Icon, value }) => (
-  <span className="inline-flex items-center gap-1.5 rounded-xl border border-slate-800 bg-slate-950/40 px-3 py-2 font-black text-slate-300">
+  <span className="inline-flex items-center gap-1.5 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 font-bold text-slate-700">
     <Icon size={13} className="text-sportsGreen" />
     {value}
   </span>
@@ -775,13 +764,14 @@ const InfoPill = ({ icon: Icon, value }) => (
 
 const EmptyPanel = ({ icon: Icon, title, body, action }) => (
   <div className="px-6 py-14 text-center">
-    <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl border border-slate-800 bg-slate-950/50 text-sportsGreen">
+    <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl border border-slate-200 bg-slate-50 text-sportsGreen">
       <Icon size={26} />
     </div>
-    <h3 className="text-lg font-black text-slate-100">{title}</h3>
+    <h3 className="text-lg font-black text-slate-900">{title}</h3>
     <p className="mx-auto mt-2 max-w-sm text-sm text-slate-500">{body}</p>
     {action}
   </div>
 );
 
 export default OwnerDashboard;
+

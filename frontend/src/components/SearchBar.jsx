@@ -13,7 +13,7 @@ const SearchBar = ({ onSearch, initialSearch = '', initialLocation = '' }) => {
   return (
     <form 
       onSubmit={handleSubmit}
-      className="glass-card p-2 rounded-2xl flex flex-col sm:flex-row items-center gap-2 max-w-4xl mx-auto shadow-sm"
+      className="bg-[#f3f8e8] p-2 rounded-2xl flex flex-col sm:flex-row items-center gap-2 max-w-4xl mx-auto shadow-[0_22px_55px_rgba(0,0,0,.3)]"
     >
       {/* Search Input */}
       <div className="flex items-center gap-3 px-4 py-2 w-full sm:flex-1">
@@ -23,11 +23,11 @@ const SearchBar = ({ onSearch, initialSearch = '', initialLocation = '' }) => {
           placeholder="Search turf name or area"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="bg-transparent border-none text-slate-100 text-sm focus:outline-none focus:ring-0 placeholder:text-slate-500 w-full"
+          className="bg-transparent border-none text-[#162018] text-sm font-semibold focus:outline-none focus:ring-0 placeholder:text-[#718172] w-full"
         />
       </div>
 
-      <div className="h-px sm:h-8 w-full sm:w-px bg-slate-800 my-1 sm:my-0"></div>
+      <div className="h-px sm:h-8 w-full sm:w-px bg-[#cfdbc9] my-1 sm:my-0"></div>
 
       {/* Location Selector */}
       <div className="flex items-center gap-3 px-4 py-2 w-full sm:w-60">
@@ -35,9 +35,9 @@ const SearchBar = ({ onSearch, initialSearch = '', initialLocation = '' }) => {
         <select 
           value={location}
           onChange={(e) => setLocation(e.target.value)}
-          className="bg-transparent border-none text-slate-100 text-sm focus:outline-none focus:ring-0 placeholder:text-slate-500 w-full cursor-pointer"
+          className="bg-transparent border-none text-[#102619] text-sm font-semibold focus:outline-none focus:ring-0 w-full cursor-pointer"
         >
-          <option value="" className="bg-darkBg-card text-slate-300">All Cities</option>
+          <option value="">All Cities</option>
           <option value="Mumbai" className="bg-darkBg-card text-slate-300">Mumbai</option>
           <option value="Bangalore" className="bg-darkBg-card text-slate-300">Bangalore</option>
           <option value="Delhi" className="bg-darkBg-card text-slate-300">Delhi</option>

@@ -1,5 +1,14 @@
 # TurfX | Smart Cricket Turf Booking & Management System
 
+## Technology stack
+
+- **Frontend:** React 18, Vite, Tailwind CSS
+- **Backend:** Python 3.10+ with Django and Django REST Framework
+- **Database:** PostgreSQL
+- **Authentication:** JWT (Simple JWT)
+
+The React client continues to use the existing `/api` contract; its default API URL is now `http://localhost:8000/api`.
+
 TurfX is a premium, full-stack, mobile-responsive web application designed to simplify sports booking, net practice sessions, and stadium slots rentals. Designed with a high-fidelity sports glassmorphism user interface, TurfX provides a seamless booking experience on both desktop and mobile viewports.
 
 ---
@@ -22,7 +31,8 @@ Follow these simple steps to pull TurfX to any local device or cloud environment
 
 ### Prerequisites
 Make sure you have the following installed on your device:
-- [Node.js](https://nodejs.org) (v16 or higher)
+- [Node.js](https://nodejs.org) (v16 or higher, for the React frontend)
+- [Python](https://www.python.org) (v3.10 or higher)
 - A running PostgreSQL database (either running locally or a free cloud-hosted instance on [Neon.tech](https://neon.tech) or [Supabase](https://supabase.com))
 
 ---
@@ -33,17 +43,17 @@ Make sure you have the following installed on your device:
 2. Inside the **`backend`** folder, create a new file named **`.env`** and copy-paste the following template:
 
 ```env
-# Server Configuration
-PORT=5000
-NODE_ENV=development
+# Django Configuration
+DJANGO_SECRET_KEY="your_custom_django_secret_key"
+DJANGO_DEBUG=True
+DJANGO_ALLOWED_HOSTS=localhost,127.0.0.1
+CORS_ALLOWED_ORIGINS=http://localhost:3000,http://localhost:5173
 
 # Database Configuration (PostgreSQL)
 # For cloud databases (Neon/Supabase), ensure your connection string ends with ?sslmode=require
 DATABASE_URL="postgresql://[username]:[password]@[host]:5432/[database_name]?sslmode=require"
 
 # Authentication
-JWT_SECRET="your_custom_jwt_secret_key_string"
-JWT_EXPIRES_IN="7d"
 
 # Razorpay Payment Gateway (Available in your Razorpay Dashboard)
 RAZORPAY_KEY_ID="rzp_test_your_razorpay_key_id"
@@ -63,23 +73,22 @@ CLOUDINARY_API_SECRET="your_cloudinary_api_secret"
    ```bash
    cd backend
    ```
-2. Install the backend package dependencies:
+2. Create and activate a Python virtual environment, then install Django dependencies:
    ```bash
-   npm install
+   python -m venv .venv
+   .venv\\Scripts\\activate  # Windows PowerShell
+   pip install -r requirements.txt
    ```
-3. Sync the database schema and structures (Prisma push):
+3. Create and apply the Django migrations:
    ```bash
-   npx prisma db push
+   python manage.py makemigrations api
+   python manage.py migrate
    ```
-4. Seed default stadium data, slots, and test accounts:
+4. Start the Django API development server:
    ```bash
-   npm run prisma:seed
+   python manage.py runserver
    ```
-5. Start the Express API development server:
-   ```bash
-   npm run dev
-   ```
-   *The backend API server is now running on:* `http://localhost:5000`
+   *The backend API server is now running on:* `http://localhost:8000`
 
 ---
 

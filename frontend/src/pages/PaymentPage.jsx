@@ -91,7 +91,7 @@ const PaymentPage = () => {
           contact: booking.customer?.phone || '',
         },
         theme: {
-          color: '#84cc16', // sportsGreen
+          color: '#25D366', // sportsGreen
         },
         modal: {
           ondismiss: function () {
@@ -115,10 +115,10 @@ const PaymentPage = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-darkBg-deep flex items-center justify-center">
+      <div className="min-h-screen bg-[#F4F6F4] flex items-center justify-center">
         <div className="text-center space-y-4">
           <LoadingSpinner size="lg" />
-          <p className="text-xs text-slate-400 font-bold animate-pulse">
+          <p className="text-xs text-slate-500 font-bold animate-pulse">
             Loading transaction details... Please wait.
           </p>
         </div>
@@ -132,23 +132,23 @@ const PaymentPage = () => {
       <div className="max-w-xl mx-auto px-4 py-12 text-center space-y-8 animate-fadeIn printable-area">
         
         {/* Animated Check */}
-        <div className="w-20 h-20 bg-sportsGreen/10 border border-sportsGreen/30 rounded-full flex items-center justify-center mx-auto shadow-neon-green pulse-cricket">
+        <div className="w-20 h-20 bg-sportsGreen/10 border border-sportsGreen/30 rounded-full flex items-center justify-center mx-auto shadow-sm pulse-cricket">
           <CheckCircle2 size={44} className="text-sportsGreen" />
         </div>
 
         <div className="space-y-2">
-          <h1 className="text-3xl font-black text-slate-100 tracking-tight">Booking Confirmed!</h1>
-          <p className="text-xs text-slate-400">
-            Invoice: <span className="font-bold text-slate-300">{receiptData.receiptId}</span>
+          <h1 className="text-3xl font-black text-slate-900 tracking-tight">Booking Confirmed!</h1>
+          <p className="text-xs text-slate-500">
+            Invoice: <span className="font-bold text-slate-700">{receiptData.receiptId}</span>
           </p>
         </div>
 
         {/* Printable Ticket receipt */}
-        <div className="glass-card text-left p-6 sm:p-8 rounded-3xl border border-slate-800 space-y-6 shadow-xl relative overflow-hidden">
+        <div className="glass-card text-left p-6 sm:p-8 rounded-3xl border border-slate-200 bg-white space-y-6 shadow-md relative overflow-hidden">
           {/* Accent decoration */}
           <div className="absolute top-0 right-0 w-24 h-24 bg-sportsGreen/5 rounded-full filter blur-xl"></div>
           
-          <h3 className="text-xs font-black uppercase text-sportsGreen tracking-widest border-b border-slate-900 pb-3">
+          <h3 className="text-xs font-black uppercase text-sportsGreen tracking-widest border-b border-slate-200 pb-3">
             🏟️ Official Match Ticket
           </h3>
 
@@ -156,9 +156,9 @@ const PaymentPage = () => {
             {/* Turf */}
             <div className="flex items-start gap-2.5">
               <span className="text-slate-500">Arena:</span>
-              <div className="text-slate-200">
+              <div className="text-slate-900">
                 <p className="font-extrabold">{receiptData.item.turfName}</p>
-                <p className="text-[10px] text-slate-400 leading-normal">{receiptData.item.address}</p>
+                <p className="text-[10px] text-slate-500 leading-normal">{receiptData.item.address}</p>
               </div>
             </div>
 
@@ -166,27 +166,27 @@ const PaymentPage = () => {
             <div className="flex items-center gap-2.5">
               <Calendar size={14} className="text-sportsGreen" />
               <span className="text-slate-500">Date:</span>
-              <span className="text-slate-200 font-extrabold">{receiptData.bookingDate}</span>
+              <span className="text-slate-900 font-extrabold">{receiptData.bookingDate}</span>
             </div>
 
             {/* Timings */}
             <div className="flex items-center gap-2.5">
               <Clock size={14} className="text-sportsGreen" />
               <span className="text-slate-500">Timing Slot:</span>
-              <span className="text-slate-200 font-extrabold">{receiptData.item.timings}</span>
+              <span className="text-slate-900 font-extrabold">{receiptData.item.timings}</span>
             </div>
 
             {/* Captain */}
             <div className="flex items-center gap-2.5">
               <User size={14} className="text-sportsGreen" />
               <span className="text-slate-500">Captain:</span>
-              <span className="text-slate-200 font-extrabold">{receiptData.customer.name}</span>
+              <span className="text-slate-900 font-extrabold">{receiptData.customer.name}</span>
             </div>
 
             {/* Cost */}
-            <div className="border-t border-slate-900 pt-4 flex items-center justify-between">
+            <div className="border-t border-slate-200 pt-4 flex items-center justify-between">
               <span className="text-slate-500">Gross Price Paid:</span>
-              <span className="text-sportsGreen text-sm font-black">₹{receiptData.payment.totalPrice.toFixed(2)}</span>
+              <span className="text-sportsGreen text-sm font-black">₹{Number(receiptData?.payment?.totalPrice || 0).toFixed(2)}</span>
             </div>
           </div>
         </div>
@@ -213,20 +213,20 @@ const PaymentPage = () => {
     <div className="max-w-md mx-auto px-4 py-12 space-y-8 animate-fadeIn">
       {/* Header */}
       <div className="text-center space-y-2">
-        <div className="w-12 h-12 bg-sportsGreen/10 border border-sportsGreen/30 rounded-2xl flex items-center justify-center mx-auto mb-4 text-sportsGreen shadow-neon-green">
+        <div className="w-12 h-12 bg-sportsGreen/10 border border-sportsGreen/30 rounded-2xl flex items-center justify-center mx-auto mb-4 text-sportsGreen shadow-sm">
           <CreditCard size={24} />
         </div>
-        <h1 className="text-2xl font-black text-slate-100 tracking-tight">Secure Payment Checkout</h1>
-        <p className="text-xs text-slate-400">Securely finalize your cricket slot reservation</p>
+        <h1 className="text-2xl font-black text-slate-900 tracking-tight">Secure Payment Checkout</h1>
+        <p className="text-xs text-slate-500">Securely finalize your cricket slot reservation</p>
       </div>
 
       {/* Ground Booking Summary Card */}
-      <div className="glass-card p-6 sm:p-8 rounded-3xl border border-slate-800 space-y-6 shadow-2xl relative overflow-hidden">
+      <div className="glass-card p-6 sm:p-8 rounded-3xl border border-slate-200 bg-white space-y-6 shadow-md relative overflow-hidden">
         {/* Pitch overlay decoration */}
         <div className="absolute top-0 right-0 w-24 h-24 bg-sportsGreen/5 rounded-full filter blur-xl"></div>
 
         <div className="space-y-4">
-          <h3 className="text-xs font-black uppercase text-sportsGreen tracking-widest border-b border-slate-900 pb-2.5">
+          <h3 className="text-xs font-black uppercase text-sportsGreen tracking-widest border-b border-slate-200 pb-2.5">
             Booking Details
           </h3>
 
@@ -234,27 +234,27 @@ const PaymentPage = () => {
             {/* Arena Name */}
             <div>
               <span className="text-slate-500 uppercase tracking-widest text-[9px] block mb-0.5">Arena / Pitch</span>
-              <span className="text-slate-200 text-sm font-extrabold">{booking?.item.turfName}</span>
+              <span className="text-slate-900 text-sm font-extrabold">{booking?.item.turfName}</span>
             </div>
 
-            <div className="grid grid-cols-2 gap-4 border-t border-slate-900 pt-3">
+            <div className="grid grid-cols-2 gap-4 border-t border-slate-200 pt-3">
               {/* Date */}
               <div>
                 <span className="text-slate-500 uppercase tracking-widest text-[9px] block mb-0.5">Match Date</span>
-                <span className="text-slate-200 font-extrabold">{booking?.bookingDate}</span>
+                <span className="text-slate-900 font-extrabold">{booking?.bookingDate}</span>
               </div>
 
               {/* Timing */}
               <div>
                 <span className="text-slate-500 uppercase tracking-widest text-[9px] block mb-0.5">Timing Slot</span>
-                <span className="text-slate-200 font-extrabold">{booking?.item.timings}</span>
+                <span className="text-slate-900 font-extrabold">{booking?.item.timings}</span>
               </div>
             </div>
 
             {/* Address */}
-            <div className="border-t border-slate-900 pt-3">
+            <div className="border-t border-slate-200 pt-3">
               <span className="text-slate-500 uppercase tracking-widest text-[9px] block mb-0.5">Location Address</span>
-              <span className="text-slate-350 text-[11px] font-bold leading-normal block">
+              <span className="text-slate-700 text-[11px] font-bold leading-normal block">
                 {booking?.item.address}, {booking?.item.location}
               </span>
             </div>
@@ -262,19 +262,19 @@ const PaymentPage = () => {
         </div>
 
         {/* Pricing Breakdown */}
-        <div className="bg-slate-900 border border-slate-850 p-4 rounded-2xl space-y-2.5 text-xs">
-          <div className="flex items-center justify-between text-slate-400 font-bold">
+        <div className="bg-slate-50 border border-slate-200 p-4 rounded-2xl space-y-2.5 text-xs">
+          <div className="flex items-center justify-between text-slate-600 font-bold">
             <span>Ground Rental fee</span>
-            <span>₹{booking?.payment.totalPrice.toFixed(2)}</span>
+            <span>₹{Number(booking?.payment?.totalPrice || 0).toFixed(2)}</span>
           </div>
-          <div className="flex items-center justify-between text-slate-400 font-bold">
+          <div className="flex items-center justify-between text-slate-600 font-bold">
             <span>GST / Platform tax</span>
             <span className="text-sportsGreen font-extrabold">FREE</span>
           </div>
-          <div className="h-px bg-slate-850 my-1"></div>
+          <div className="h-px bg-slate-200 my-1"></div>
           <div className="flex items-center justify-between font-black">
-            <span className="text-slate-200">Total Amount Due</span>
-            <span className="text-sportsGreen text-base">₹{booking?.payment.totalPrice.toFixed(2)}</span>
+            <span className="text-slate-900">Total Amount Due</span>
+            <span className="text-sportsGreen text-base">₹{Number(booking?.payment?.totalPrice || 0).toFixed(2)}</span>
           </div>
         </div>
 
@@ -290,7 +290,7 @@ const PaymentPage = () => {
           type="button"
           onClick={handlePayWithRazorpay}
           disabled={paying}
-          className="w-full btn-neon-green py-3.5 text-xs font-black shadow-neon-green uppercase tracking-wider flex items-center justify-center gap-2"
+          className="w-full btn-neon-green py-3.5 text-xs font-black uppercase tracking-wider flex items-center justify-center gap-2"
         >
           <ShieldCheck size={15} />
           {paying ? 'Processing Payment...' : `Pay Securely via Razorpay · ₹${booking?.payment.totalPrice}`}
@@ -301,3 +301,4 @@ const PaymentPage = () => {
 };
 
 export default PaymentPage;
+

@@ -134,7 +134,7 @@ const TurfDetails = () => {
             />
             <div className="absolute top-6 right-6 bg-darkBg-deep/90 backdrop-blur-md px-4 py-2 rounded-2xl border border-slate-850 flex items-center gap-1.5 shadow-xl">
               <Star size={16} className="text-sportsGreen fill-sportsGreen" />
-              <span className="text-sm font-black text-slate-100">{turf.rating > 0 ? turf.rating.toFixed(1) : 'New'}</span>
+              <span className="text-sm font-black text-slate-100">{Number(turf.rating) > 0 ? Number(turf.rating).toFixed(1) : 'New'}</span>
             </div>
           </div>
 

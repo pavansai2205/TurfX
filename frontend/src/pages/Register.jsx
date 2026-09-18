@@ -48,16 +48,15 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-[85vh] flex items-center justify-center px-4 py-12 bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] from-sportsGreen/5 via-darkBg-deep to-darkBg-deep">
+    <div className="min-h-[85vh] flex items-center justify-center px-4 py-12 bg-[#eef2f0]">
       <div className="max-w-md w-full relative">
-        <div className="absolute -top-10 -right-10 w-40 h-40 bg-sportsOrange/5 rounded-full filter blur-2xl pulse-cricket"></div>
         
         {/* Glass Card Box */}
-        <div className="glass-card p-8 rounded-3xl border border-slate-800 shadow-2xl relative">
+        <div className="glass-card p-8 rounded-2xl border border-[#d8d9d1] shadow-sm relative">
           
           {/* Header */}
           <div className="text-center space-y-2 mb-6">
-            <div className="w-12 h-12 bg-sportsGreen rounded-2xl flex items-center justify-center text-slate-950 font-black text-lg mx-auto pulse-cricket">
+            <div className="w-12 h-12 bg-sportsGreen rounded-xl flex items-center justify-center text-white font-black text-lg mx-auto">
               T
             </div>
             <h2 className="text-2xl font-black text-slate-100 tracking-tight">Create TurfX Account</h2>
@@ -83,8 +82,8 @@ const Register = () => {
                   onClick={() => handleRoleSelect('USER')}
                   className={`p-3 rounded-xl border flex flex-col items-center gap-1.5 transition-all text-center ${
                     formData.role === 'USER'
-                      ? 'bg-sportsGreen/10 border-sportsGreen text-sportsGreen shadow-neon-green shadow-sm'
-                      : 'bg-slate-900/60 border-slate-800/80 text-slate-400'
+                      ? 'bg-sportsGreen/10 border-sportsGreen text-sportsGreen'
+                      : 'bg-white border-[#d8d9d1] text-[#68736b] hover:border-sportsGreen/50'
                   }`}
                 >
                   <User size={16} />
@@ -95,8 +94,8 @@ const Register = () => {
                   onClick={() => handleRoleSelect('TURF_OWNER')}
                   className={`p-3 rounded-xl border flex flex-col items-center gap-1.5 transition-all text-center ${
                     formData.role === 'TURF_OWNER'
-                      ? 'bg-sportsGreen/10 border-sportsGreen text-sportsGreen shadow-neon-green shadow-sm'
-                      : 'bg-slate-900/60 border-slate-800/80 text-slate-400'
+                      ? 'bg-sportsGreen/10 border-sportsGreen text-sportsGreen'
+                      : 'bg-white border-[#d8d9d1] text-[#68736b] hover:border-sportsGreen/50'
                   }`}
                 >
                   <Shield size={16} />
@@ -116,7 +115,7 @@ const Register = () => {
                   placeholder="Rahul Kumar"
                   value={formData.name}
                   onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
-                  className="w-full bg-slate-900 border border-slate-800 rounded-xl py-2.5 pl-11 pr-4 text-xs text-slate-100 placeholder:text-slate-500 focus:outline-none focus:border-sportsGreen focus:ring-0 transition-colors"
+                  className="form-input py-2.5 pl-11 pr-4 text-xs"
                 />
               </div>
             </div>
@@ -132,7 +131,7 @@ const Register = () => {
                   placeholder="rahul@example.com"
                   value={formData.email}
                   onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
-                  className="w-full bg-slate-900 border border-slate-800 rounded-xl py-2.5 pl-11 pr-4 text-xs text-slate-100 placeholder:text-slate-500 focus:outline-none focus:border-sportsGreen focus:ring-0 transition-colors"
+                  className="form-input py-2.5 pl-11 pr-4 text-xs"
                 />
               </div>
             </div>
@@ -148,7 +147,7 @@ const Register = () => {
                   placeholder="+91 98765 43210"
                   value={formData.phone}
                   onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))}
-                  className="w-full bg-slate-900 border border-slate-800 rounded-xl py-2.5 pl-11 pr-4 text-xs text-slate-100 placeholder:text-slate-500 focus:outline-none focus:border-sportsGreen focus:ring-0 transition-colors"
+                  className="form-input py-2.5 pl-11 pr-4 text-xs"
                 />
               </div>
             </div>
@@ -164,7 +163,7 @@ const Register = () => {
                   placeholder="Min. 6 characters"
                   value={formData.password}
                   onChange={(e) => setFormData(prev => ({ ...prev, password: e.target.value }))}
-                  className="w-full bg-slate-900 border border-slate-800 rounded-xl py-2.5 pl-11 pr-4 text-xs text-slate-100 placeholder:text-slate-500 focus:outline-none focus:border-sportsGreen focus:ring-0 transition-colors"
+                  className="form-input py-2.5 pl-11 pr-4 text-xs"
                 />
               </div>
             </div>

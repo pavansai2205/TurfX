@@ -1,4 +1,4 @@
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000/api';
 import axios from 'axios';
 
 // Create customized Axios client
@@ -19,6 +19,17 @@ api.interceptors.request.use(
     return config;
   },
   (error) => {
+    return Promise.reject(error);
+  }
+);
+
+// Response interceptor: automatically clear expired/invalid tokens on 401 response
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response && error.response.status === 401) {
+      localStorage.removeItem('turfx_token');
+    }
     return Promise.reject(error);
   }
 );

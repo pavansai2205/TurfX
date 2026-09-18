@@ -63,16 +63,15 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-[80vh] flex items-center justify-center px-4 py-12 bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] from-sportsGreen/5 via-darkBg-deep to-darkBg-deep">
+    <div className="min-h-[80vh] flex items-center justify-center px-4 py-12 bg-[#eef2f0]">
       <div className="max-w-md w-full relative">
-        <div className="absolute -top-10 -left-10 w-40 h-40 bg-sportsGreen/5 rounded-full filter blur-2xl pulse-cricket"></div>
         
         {/* Glass Card Box */}
-        <div className="glass-card p-8 rounded-3xl border border-slate-800 shadow-2xl relative">
+        <div className="glass-card p-8 rounded-2xl border border-[#d8d9d1] shadow-sm relative">
           
           {/* Header */}
           <div className="text-center space-y-2 mb-8">
-            <div className="w-12 h-12 bg-sportsGreen rounded-2xl flex items-center justify-center text-slate-950 font-black text-lg mx-auto pulse-cricket">
+            <div className="w-12 h-12 bg-sportsGreen rounded-xl flex items-center justify-center text-white font-black text-lg mx-auto">
               T
             </div>
             <h2 className="text-2xl font-black text-slate-100 tracking-tight">Sign In to TurfX</h2>
@@ -98,7 +97,7 @@ const Login = () => {
                   placeholder="name@example.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full bg-slate-900 border border-slate-800 rounded-xl py-3 pl-11 pr-4 text-xs text-slate-100 placeholder:text-slate-500 focus:outline-none focus:border-sportsGreen focus:ring-0 transition-colors"
+                  className="form-input py-3 pl-11 pr-4 text-xs"
                 />
               </div>
             </div>
@@ -122,7 +121,7 @@ const Login = () => {
                   placeholder="••••••••"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full bg-slate-900 border border-slate-800 rounded-xl py-3 pl-11 pr-4 text-xs text-slate-100 placeholder:text-slate-500 focus:outline-none focus:border-sportsGreen focus:ring-0 transition-colors"
+                  className="form-input py-3 pl-11 pr-4 text-xs"
                 />
               </div>
             </div>

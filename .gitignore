@@ -1,44 +1,86 @@
-# Dependency directories
-node_modules/
-jspm_packages/
-web_modules/
+# ==========================================
+# TurfX Root .gitignore
+# ==========================================
 
-# Local configuration files
+# ------------------------------------------
+# Environment & Local Secrets
+# ------------------------------------------
 .env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+.env.*
+!.env.example
+*.env
+backend/.env
+frontend/.env
 
-# Build outputs
+# ------------------------------------------
+# Node.js & React Frontend
+# ------------------------------------------
+node_modules/
+frontend/node_modules/
 dist/
+frontend/dist/
 build/
-out/
+frontend/build/
 .next/
 .nuxt/
-
-# Logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-# Editor / IDE settings
+# ------------------------------------------
+# Python & Django Backend
+# ------------------------------------------
+__pycache__/
+*/__pycache__/
+*/*/__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.python-version
+.venv/
+backend/.venv/
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# Django Database & Static/Media uploads
+*.sqlite3
+*.db
+*.db-journal
+backend/db.sqlite3
+backend/prisma/dev.db
+backend/prisma/dev.db-journal
+backend/staticfiles/
+backend/media/
+
+# ------------------------------------------
+# Editor & IDE Configs
+# ------------------------------------------
 .vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
 .idea/
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
-*.sw?
+*.swp
+*.swo
 
-# OS metadata
+# ------------------------------------------
+# OS Metadata & Temp Files
+# ------------------------------------------
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
 Thumbs.db
-
-# Database / Prisma / SQLite artifacts
-*.db
-*.db-journal
-/backend/prisma/dev.db
-/backend/prisma/dev.db-journal
+*.log
